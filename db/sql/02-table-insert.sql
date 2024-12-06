@@ -1,4 +1,4 @@
-INSERT INTO master.dbo.dog (breed, color)
+INSERT INTO animal.dbo.dog (breed, color)
 VALUES
 ('Am Bulldog', 'White'),
 ('Blue Tick', 'Grey'),

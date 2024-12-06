@@ -1,17 +1,19 @@
-version: '3'
+version: '3.7'
 services:
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 80:8080
+  dbeaver:
+    build: app
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY:0
     depends_on:
-      - db
-    links:
-      - "db:db"
+      db:
+        condition: service_healthy
+        restart: true
 
   db:
-    build:
-      context: db
-    volumes:
-      - ./db/data_dump:/var/opt/mssql
+    build: db
+    ports:
+      - 1433
+    healthcheck:
+      test: "pwd"
